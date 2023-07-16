@@ -1,5 +1,7 @@
 #include <c10/util/TypeCast.h>
 
+#include <stdexcept>
+
 namespace c10 {
 
 void report_overflow(const char* name) {

@@ -5,6 +5,8 @@
 #include <torch/csrc/jit/frontend/source_range.h>
 #include <torch/csrc/jit/ir/scope.h>
 
+#include <stdexcept>
+
 // helpers for handling constants in the IR
 // - create constant nodes from ints, floats, complex, intlist, Tensors, and
 // other types

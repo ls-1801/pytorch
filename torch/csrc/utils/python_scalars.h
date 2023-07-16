@@ -7,6 +7,8 @@
 #include <torch/csrc/Exceptions.h>
 #include <torch/csrc/utils/python_numbers.h>
 
+#include <stdexcept>
+
 namespace torch {
 namespace utils {
 

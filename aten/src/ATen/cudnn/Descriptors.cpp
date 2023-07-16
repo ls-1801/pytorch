@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <stdexcept>
 
 namespace at { namespace native {
 

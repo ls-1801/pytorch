@@ -2,6 +2,8 @@
 
 #include <ATen/ATen.h>
 
+#include <stdexcept>
+
 namespace at { namespace native {
 
 cudnnDataType_t getCudnnDataTypeFromScalarType(const at::ScalarType dtype) {

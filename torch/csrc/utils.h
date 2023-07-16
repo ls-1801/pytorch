@@ -7,6 +7,7 @@
 #include <torch/csrc/utils/python_compat.h>
 #include <torch/csrc/utils/python_numbers.h>
 #include <string>
+#include <stdexcept>
 #include <type_traits>
 #include <vector>
 

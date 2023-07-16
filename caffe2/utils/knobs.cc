@@ -11,6 +11,8 @@
 
 #include "caffe2/utils/knobs.h"
 
+#include <stdexcept>
+
 namespace caffe2 {
 
 namespace detail {

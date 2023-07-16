@@ -3,6 +3,7 @@
 #include <ATen/mkl/Exceptions.h>
 #include <mkl_dfti.h>
 #include <ATen/Tensor.h>
+#include <stdexcept>
 
 namespace at { namespace native {
 

@@ -3,6 +3,7 @@
 #include <functional>
 #include <memory>
 #include <unordered_map>
+#include <stdexcept>
 #include <vector>
 
 #include <c10/util/SmallVector.h>

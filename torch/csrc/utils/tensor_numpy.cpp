@@ -4,6 +4,8 @@
 #include <c10/util/irange.h>
 #include <torch/csrc/utils/numpy_stub.h>
 
+#include <stdexcept>
+
 #ifndef USE_NUMPY
 namespace torch {
 namespace utils {

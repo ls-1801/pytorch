@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cmath>
+#include <stdexcept>
 
 // Android NDK platform < 21 with libstdc++ has spotty C++11 support.
 // Various hacks in this header allow the rest of the codebase to use

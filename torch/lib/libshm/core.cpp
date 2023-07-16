@@ -1,5 +1,6 @@
 #include <array>
 #include <cstring>
+#include <stdexcept>
 #include <string>
 #include <unordered_map>
 

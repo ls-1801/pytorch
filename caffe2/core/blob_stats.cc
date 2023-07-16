@@ -1,5 +1,7 @@
 #include "caffe2/core/blob_stats.h"
 
+#include <stdexcept>
+
 namespace caffe2 {
 
 const BlobStatGetter* BlobStatRegistry::get(TypeIdentifier id) {

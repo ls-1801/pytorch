@@ -2,6 +2,8 @@
 
 #include <torch/csrc/jit/ir/ir.h>
 #include <torch/csrc/onnx/onnx.h>
+
+#include <stdexcept>
 #include <vector>
 
 namespace torch {

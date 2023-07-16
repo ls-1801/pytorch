@@ -3,6 +3,7 @@
 #include <c10/util/irange.h>
 
 #include <iostream>
+#include <stdexcept>
 
 namespace at { namespace native {
 

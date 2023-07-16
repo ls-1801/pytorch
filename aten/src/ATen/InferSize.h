@@ -6,6 +6,7 @@
 #include <c10/util/DimVector.h>
 #include <c10/util/Optional.h>
 #include <sstream>
+#include <stdexcept>
 #include <vector>
 
 namespace at {

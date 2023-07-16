@@ -2,6 +2,7 @@
 #include <torch/csrc/monitor/events.h>
 
 #include <sstream>
+#include <stdexcept>
 #include <unordered_set>
 
 namespace torch {

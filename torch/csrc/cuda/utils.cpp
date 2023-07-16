@@ -1,6 +1,7 @@
 #include <torch/csrc/cuda/THCP.h>
 #include <torch/csrc/python_headers.h>
 #include <cstdarg>
+#include <stdexcept>
 #include <string>
 
 #ifdef USE_CUDA
