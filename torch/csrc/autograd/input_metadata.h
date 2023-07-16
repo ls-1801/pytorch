@@ -140,7 +140,6 @@ struct InputMetadata {
     return was_default_constructed_;
   }
 
- private:
   bool is_nested_tensor() const {
     return (c10::holds_alternative<at::Tensor>(shape_));
   }
@@ -156,11 +155,15 @@ struct InputMetadata {
     const auto& dim_shape = c10::get<SymIntSmallVec>(shape_);
     return c10::SymIntArrayRef(dim_shape.data(), dim_shape.size());
   }
+  SymIntSmallVec& mutable_shape_as_dim_vector() {
+    return c10::get<SymIntSmallVec>(shape_);
+  }
 
   at::Tensor shape_as_tensor() const {
     return c10::get<at::Tensor>(shape_);
   }
 
+ private:
   const at::TensorOptions options_;
   MetadataShape shape_;
   c10::Stream stream_ = c10::Stream(c10::Stream::Default::DEFAULT, device());

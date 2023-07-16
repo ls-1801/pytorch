@@ -5,6 +5,7 @@
 #include <torch/csrc/autograd/functions/utils.h>
 #include <torch/csrc/autograd/grad_mode.h>
 #include <torch/csrc/autograd/variable.h>
+#include <torch/csrc/dynamo/compiled_autograd.h>
 
 #include <cstdint>
 #include <stdexcept>
@@ -58,6 +59,30 @@ auto AccumulateGrad::apply(variable_list&& grads) -> variable_list {
 
   return variable_list();
 }
+
+#ifdef TORCH_COMPILED_AUTOGRAD
+void AccumulateGrad::compiled_args(CompiledNodeArgs& args) {
+  at::Tensor& grad = variable.mutable_grad();
+  args.collect(grad.defined());
+  if (grad.defined()) {
+    args.collect(grad);
+  }
+  args.set_grad_target(variable);
+}
+variable_list AccumulateGrad::apply_with_saved(
+    const variable_list& inputs,
+    SwapSavedVariables& saved) {
+  at::Tensor& grad = variable.mutable_grad();
+  at::Tensor result = inputs[0];
+  if (grad.defined()) {
+    saved.before(grad);
+    result = result + grad;
+    saved.after(grad);
+  }
+  saved.set_grad_value(result);
+  return variable_list();
+}
+#endif
 
 } // namespace autograd
 } // namespace torch
