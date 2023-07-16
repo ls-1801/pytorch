@@ -148,6 +148,9 @@ class OptimizedModule(torch.nn.Module):
             attr for attr in super().__dir__() if attr not in orig_mod_attrs
         ]
 
+    def get_compiler_config(self):
+        return self.dynamo_ctx.compiler_config
+
 
 def remove_from_cache(f):
     """
@@ -362,6 +365,7 @@ class OptimizeContext(_TorchDynamoContext):
         *,
         export=False,
         dynamic=False,
+        compiler_config=None,
     ):
         def on_enter():
             global most_recent_backend
@@ -377,6 +381,7 @@ class OptimizeContext(_TorchDynamoContext):
             install_generation_tagging_init()
 
         compiler_fn = innermost_fn(callback)
+        self.compiler_config = compiler_config
         super().__init__(
             callback=callback,
             on_enter=on_enter,
@@ -451,7 +456,12 @@ def catch_errors_wrapper(callback, hooks: Hooks):
 
 
 def _optimize_catch_errors(
-    compile_fn, hooks: Hooks, backend_ctx_ctor=null_context, export=False, dynamic=False
+    compile_fn,
+    hooks: Hooks,
+    backend_ctx_ctor=null_context,
+    export=False,
+    dynamic=False,
+    compiler_config=None,
 ):
     return OptimizeContext(
         catch_errors_wrapper(compile_fn, hooks),
@@ -459,6 +469,7 @@ def _optimize_catch_errors(
         first_ctx=True,
         export=export,
         dynamic=dynamic,
+        compiler_config=compiler_config,
     )
 
 
@@ -556,6 +567,9 @@ def optimize(
         hooks,
         backend_ctx_ctor,
         dynamic=dynamic,
+        compiler_config=backend.get_compiler_config()
+        if hasattr(backend, "get_compiler_config")
+        else None,
     )
 
 
